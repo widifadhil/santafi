@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-
 const List<Map<String, dynamic>> destinations = [
   {
-    "title": "Haji\n& Umrah",
+    "title": "Haji&Umrah",
     "tours": "4 Tours",
     "image": 'images/ListPaket/Bitmap.png',
   },
@@ -24,8 +23,16 @@ const List<Map<String, dynamic>> destinations = [
 ];
 
 class DestinasiSection extends StatelessWidget {
-  const DestinasiSection({super.key, required String category});
+  const DestinasiSection({
+    super.key,
+    required this.selectedCategory,
+    required this.selectedYear,
+    required this.selectedMonth, required String category,
+  });
 
+  final String selectedCategory;
+  final String selectedYear;
+  final String selectedMonth;
   @override
   Widget build(BuildContext context) {
     // Get the screen width
@@ -62,7 +69,14 @@ class DestinasiSection extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         final destination = destinations[index];
         return TextButton(
-          onPressed: () {  },
+          onPressed: () {
+            final category = destination['title'];  // Define the category (title)
+            print("Selected Destination: ${destination['title']}");
+            Navigator.pushNamed(context, '/Destinasi', arguments: {
+              'category': category,
+              'year': selectedYear,
+              'month': selectedMonth,
+            }); },
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,

@@ -5,25 +5,25 @@ const List<Map<String, dynamic>> galeri = [
     "image": 'images/galeri.png'
   },
   {
-    "image": 'images/galeri.png'
+    "image": 'images/galeri2.png'
   },
   {
-    "image": 'images/galeri.png'
+    "image": 'images/galeri3.png'
   },
   {
-    "image": 'images/galeri.png'
+    "image": 'images/galeri4.png'
   },
   {
-    "image": 'images/galeri.png'
+    "image": 'images/galeri5.png'
   },
   {
-    "image": 'images/galeri.png'
+    "image": 'images/galeri6.png'
   },
   {
-    "image": 'images/galeri.png'
+    "image": 'images/galeri7.png'
   },
   {
-    "image": 'images/galeri.png'
+    "image": 'images/galeri8.png'
   },
 ];
 

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:santafi/PromotionBanner.dart';
 import 'package:santafi/SearchWidget.dart';
+import 'package:santafi/destinasi_section.dart';
 import 'package:santafi/galeri_widget.dart';
 import 'package:santafi/Footer.dart';
 import 'testimonial_widget.dart';
@@ -20,13 +22,7 @@ class _BerandaPageState extends State<BerandaPage> {
   String selectedYear = 'Semua Tahun'; // Default value for Year
   String selectedMonth = 'Semua Bulan';
 
-  void _updateFilters(String? category, String? year, String? month) {
-    setState(() {
-      selectedCategory = category ?? 'Semua Paket';
-      selectedYear = year ?? 'Semua Tahun';
-      selectedMonth = month ?? 'Semua Bulan';
-    });
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +37,7 @@ class _BerandaPageState extends State<BerandaPage> {
           children: [
             Center(
               child: SizedBox(
-                width: 1283,
+                width: MediaQuery.of(context).size.width * 0.8,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -52,12 +48,12 @@ class _BerandaPageState extends State<BerandaPage> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 75),
+                            const SizedBox(height: 75),
                             // Headline
                             RichText(
                               text: TextSpan(
                                 children: [
-                                  TextSpan(
+                                  const TextSpan(
                                     text: 'Perjalanan\nBerharga Bersama',
                                     style: TextStyle(
                                         color: Colors.black,
@@ -76,9 +72,9 @@ class _BerandaPageState extends State<BerandaPage> {
                                 ],
                               ),
                             ),
-                            SizedBox(height: 30),
+                            const SizedBox(height: 30),
                             // Subheadline
-                            Text(
+                            const Text(
                               'Bersama SantaFi Travel, wujudkan impian ibadah Umrah, Haji, '
                                   'dan wisata halal\nke berbagai destinasi domestik dan internasional '
                                   'dengan layanan terbaik.',
@@ -88,14 +84,14 @@ class _BerandaPageState extends State<BerandaPage> {
                                   fontFamily: 'PlusJakartaSans',
                                   fontWeight: FontWeight.w400),
                             ),
-                            SizedBox(height: 80),
+                            const SizedBox(height: 80),
                             // Search Bar
-                            SearchWidget(
+                            const SearchWidget(
                             ),
                           ],
                         ),
                         Container(
-                          alignment: Alignment(1.0, -0.75),
+                          alignment: const Alignment(1.0, -0.75),
                           child: Image.asset(
                             'images/jumbo.png',
                             height: 672,
@@ -104,7 +100,7 @@ class _BerandaPageState extends State<BerandaPage> {
                         )
                       ],
                     ),
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                     // Maskapai
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -117,9 +113,9 @@ class _BerandaPageState extends State<BerandaPage> {
                         Image.asset('images/Maskapai/Qatar.png'),
                       ],
                     ),
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                     // Section Destinasi
-                    Row(
+                    const Row(
                       children: [
                         Text(
                           'Destinasi',
@@ -130,11 +126,13 @@ class _BerandaPageState extends State<BerandaPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-
-                    SizedBox(height: 60),
+                    const SizedBox(height: 20),
+                    DestinasiSection( selectedCategory: selectedCategory,
+                      selectedYear: selectedYear,
+                      selectedMonth: selectedMonth, category: '',),
+                    const SizedBox(height: 60),
                     // Section Promo Banner
-                    Row(
+                    const Row(
                       children: [
                         Text(
                           'Eksplorasi Penawaran Kami',
@@ -145,28 +143,25 @@ class _BerandaPageState extends State<BerandaPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      height: 417,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(16.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 8.0,
-                            offset: Offset(0, 4),
-                          ),
-                        ],
-                        image: DecorationImage(
-                          image: AssetImage('images/promo.png'),
-                          fit: BoxFit.cover,
+                    const SizedBox(height: 20),
+                  Container(
+                    height: 417,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(16.0),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 8.0,
+                          offset: Offset(0, 4),
                         ),
-                      ),
+                      ],
                     ),
-                    SizedBox(height: 20),
-                    SizedBox(height: 60),
-                    Row(
+                    child: PromotionBanner(), // Insert the PromotionBanner here
+                  ),
+                    const SizedBox(height: 20),
+                    const SizedBox(height: 60),
+                    const Row(
                       children: [
                         Text(
                           'Galeri',
@@ -177,22 +172,22 @@ class _BerandaPageState extends State<BerandaPage> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
-                    GaleriWidget(),
-                    SizedBox(height: 60),
+                    const SizedBox(height: 20),
+                    const GaleriWidget(),
+                    const SizedBox(height: 60),
                     Container(
                       height: 384,
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16.0),
-                        boxShadow: [
+                        boxShadow: const [
                           BoxShadow(
                             color: Colors.black12,
                             blurRadius: 8.0,
                             offset: Offset(0, 4),
                           ),
                         ],
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage('images/hubungi.png'),
                           fit: BoxFit.cover,
                         ),
@@ -210,14 +205,14 @@ class _BerandaPageState extends State<BerandaPage> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Jangan Ragu, Rencanakan Perjalanan Anda Sekarang',
                                       style: TextStyle(
                                           fontFamily: 'Montserrat',
                                           fontSize: 20,
                                           color: Colors.white),
                                     ),
-                                    Text(
+                                    const Text(
                                       'Konsultasikan Rencana Perjalanan\nAnda Bersama Kami',
                                       style: TextStyle(
                                           fontFamily: 'Montserrat',
@@ -225,7 +220,7 @@ class _BerandaPageState extends State<BerandaPage> {
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600),
                                     ),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     ElevatedButton(
                                       onPressed: () {},
                                       style: ElevatedButton.styleFrom(
@@ -234,7 +229,7 @@ class _BerandaPageState extends State<BerandaPage> {
                                           borderRadius: BorderRadius.circular(10.0),
                                         ),
                                       ),
-                                      child: Padding(
+                                      child: const Padding(
                                         padding: EdgeInsets.all(6.0),
                                         child: Text(
                                           'Hubungi Kami',
@@ -251,7 +246,7 @@ class _BerandaPageState extends State<BerandaPage> {
                             )
                           ]),
                     ),
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                     Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -263,8 +258,8 @@ class _BerandaPageState extends State<BerandaPage> {
                                 color: Colors.blue[900],
                               ),
                             ),
-                            SizedBox(height: 14),
-                            Text(
+                            const SizedBox(height: 14),
+                            const Text(
                               'Testimoni Pelanggan',
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -272,49 +267,19 @@ class _BerandaPageState extends State<BerandaPage> {
                                 fontFamily: 'Montserrat',
                               ),
                             ),
-                            SizedBox(height: 70),
+                            // const SizedBox(height: 50),
                             // Menambahkan testimonial widget di sini
-                            Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                // Left IconButton
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: IconButton.outlined(
-                                    color: Colors.blue[900],
-                                    onPressed: () {
-                                      // Action for previous testimonial
-                                    },
-                                    icon: Icon(Icons.chevron_left_rounded, color: Colors.blue[900]),
-                                    iconSize: 50,
-                                  ),
-                                ),
-                                // Testimonial Widget
-                                SizedBox(
-                                  width: 700,
-                                  child: testimonialWidget(),
-                                ),
-                                // Right IconButton
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: IconButton.outlined(
-                                    onPressed: () {
-                                      // Action for next testimonial
-                                    },
-                                    icon: Icon(Icons.chevron_right_rounded, color: Colors.blue[900]),
-                                    iconSize: 50,
-                                  ),
-                                ),
-                              ],
+                            Center(
+                              child: TestimonialWidget(),
                             )
                           ],
                         )),
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                   ],
                 ),
               ),
             ),
-            Footer()
+            const Footer()
           ],
         ),
       ),

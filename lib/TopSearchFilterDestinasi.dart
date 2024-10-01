@@ -11,7 +11,7 @@ class TopSearchFilterDestination extends StatefulWidget {
   final String initialMonth;
 
   const TopSearchFilterDestination({
-    Key? key,
+    super.key,
     required this.categories,
     required this.years,
     required this.months,
@@ -19,7 +19,7 @@ class TopSearchFilterDestination extends StatefulWidget {
     this.initialCategory = 'Semua Paket',
     this.initialYear = 'Semua Tahun',
     this.initialMonth = 'Semua Bulan',
-  }) : super(key: key);
+  });
 
   @override
   _TopSearchFilterDestinationState createState() => _TopSearchFilterDestinationState();
@@ -29,6 +29,21 @@ class _TopSearchFilterDestinationState extends State<TopSearchFilterDestination>
   String? _selectedCategory;
   String? _selectedYear;
   String? _selectedMonth;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize the selected values only if they exist in the respective lists
+    _selectedCategory = widget.categories.contains(widget.initialCategory)
+        ? widget.initialCategory
+        : null;
+    _selectedYear = widget.years.contains(widget.initialYear)
+        ? widget.initialYear
+        : null;
+    _selectedMonth = widget.months.contains(widget.initialMonth)
+        ? widget.initialMonth
+        : null;
+  }
 
   // Function to handle search action
   void _onSearchPressed() {
@@ -61,10 +76,10 @@ class _TopSearchFilterDestinationState extends State<TopSearchFilterDestination>
             // Dropdown for Category
             Expanded(
               child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Kategori Perjalanan',
-                  prefixIcon: const Icon(Icons.location_on_rounded),
-                  border: const OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.location_on_rounded),
+                  border: OutlineInputBorder(),
                 ),
                 value: _selectedCategory,
                 items: widget.categories.map((String value) {
@@ -85,10 +100,10 @@ class _TopSearchFilterDestinationState extends State<TopSearchFilterDestination>
             // Dropdown for Year
             Expanded(
               child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Tahun',
-                  prefixIcon: const Icon(Icons.calendar_today),
-                  border: const OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.calendar_today),
+                  border: OutlineInputBorder(),
                 ),
                 value: _selectedYear,
                 items: widget.years.map((String value) {
@@ -109,10 +124,10 @@ class _TopSearchFilterDestinationState extends State<TopSearchFilterDestination>
             // Dropdown for Month
             Expanded(
               child: DropdownButtonFormField<String>(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Bulan',
-                  prefixIcon: const Icon(Icons.calendar_month),
-                  border: const OutlineInputBorder(),
+                  prefixIcon: Icon(Icons.calendar_month),
+                  border: OutlineInputBorder(),
                 ),
                 value: _selectedMonth,
                 items: widget.months.map((String value) {

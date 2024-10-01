@@ -114,6 +114,8 @@ class _HeaderState extends State<Header> {
   }
 
   Widget _buildWebHeader() {
+    String? currentRoute = ModalRoute.of(context)?.settings.name;
+
     return SizedBox(
       width: 1283,
       child: Row(
@@ -130,10 +132,10 @@ class _HeaderState extends State<Header> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/');
                 },
-                child: const Text(
+                child: Text(
                   'Beranda',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: currentRoute == '/' ? Colors.black : Colors.grey,
                     fontFamily: 'Montserrat',
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -145,10 +147,10 @@ class _HeaderState extends State<Header> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/Destinasi');
                 },
-                child: const Text(
+                child: Text(
                   'Destinasi',
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: currentRoute == '/Destinasi' ? Colors.black : Colors.grey,
                     fontFamily: 'Montserrat',
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -160,10 +162,10 @@ class _HeaderState extends State<Header> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/TentangKami');
                 },
-                child: const Text(
+                child: Text(
                   'Tentang Kami',
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: currentRoute == '/TentangKami' ? Colors.black : Colors.grey,
                     fontFamily: 'Montserrat',
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -175,10 +177,10 @@ class _HeaderState extends State<Header> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/Artikel');
                 },
-                child: const Text(
+                child: Text(
                   'Artikel',
                   style: TextStyle(
-                    color: Colors.grey,
+                    color: currentRoute == '/Artikel' ? Colors.black : Colors.grey,
                     fontFamily: 'Montserrat',
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -205,8 +207,7 @@ class _HeaderState extends State<Header> {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),
@@ -228,4 +229,5 @@ class _HeaderState extends State<Header> {
       ),
     );
   }
+
 }

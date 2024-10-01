@@ -13,7 +13,7 @@ const String plusjakartasans = 'PlusJakartaSans';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb){
-    Firebase.initializeApp(options: FirebaseOptions(apiKey: "AIzaSyAq6lAp1C5wK8D_RePqj-2WsBQNehK8zkw",
+    Firebase.initializeApp(options: const FirebaseOptions(apiKey: "AIzaSyAq6lAp1C5wK8D_RePqj-2WsBQNehK8zkw",
         authDomain: "santafi-web.firebaseapp.com",
         projectId: "santafi-web",
         storageBucket: "santafi-web.appspot.com",
@@ -29,10 +29,10 @@ void main() {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
-        '/': (context) => BerandaPage(tahun: '2024', kategori: 'Default Category'),
-        '/Destinasi': (context) => DestinasiPage(tahun: '2024', kategori: 'Default Category', bulan: 'Pilih Bulan',),
-        '/TentangKami': (context) => TentangKamiPage(),
-        '/Artikel': (context) => ArtikelPage(),
+        '/': (context) => const BerandaPage(tahun: '2024', kategori: 'Default Category'),
+        '/Destinasi': (context) => const DestinasiPage(tahun: '2024', kategori: 'Default Category', bulan: 'Pilih Bulan',),
+        '/TentangKami': (context) => const TentangKamiPage(),
+        '/Artikel': (context) => const ArtikelPage(),
       },
     ),
   );

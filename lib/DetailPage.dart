@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:santafi/Footer.dart';
 import 'package:santafi/Header.dart';
 import 'package:santafi/Model/Product.dart';
 import 'package:santafi/main.dart';
@@ -16,10 +17,41 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  late int _selectedPackageIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedPackageIndex = widget.product.packages.indexWhere(
+      (pkg) => pkg.packageType == widget.product.selectedPackage,
+    );
+  }
+
+  void _selectNextPackage() {
+    setState(() {
+      if (_selectedPackageIndex < widget.product.packages.length - 1) {
+        _selectedPackageIndex++;
+      } else {
+        _selectedPackageIndex = 0; // Loop back to the first package
+      }
+    });
+  }
+
+  void _selectPreviousPackage() {
+    setState(() {
+      if (_selectedPackageIndex > 0) {
+        _selectedPackageIndex--;
+      } else {
+        _selectedPackageIndex =
+            widget.product.packages.length - 1; // Loop back to the last package
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
-
+    Package selectedPackage = widget.product.packages[_selectedPackageIndex];
     return Scaffold(
       backgroundColor: const Color(0xFFFAFBFC),
       appBar: const PreferredSize(
@@ -27,7 +59,6 @@ class _DetailPageState extends State<DetailPage> {
         child: Header(),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,13 +68,13 @@ class _DetailPageState extends State<DetailPage> {
                 width: 1283,
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     //Judul Product Atas
                     Row(
                       children: [
-                        Text(
+                        const Text(
                           'Beranda',
                           style: TextStyle(
                               color: Color(0xFFFE6D00),
@@ -51,8 +82,8 @@ class _DetailPageState extends State<DetailPage> {
                               fontWeight: FontWeight.w400,
                               fontSize: 14),
                         ),
-                        Icon(Icons.chevron_right_rounded),
-                        Text(
+                        const Icon(Icons.chevron_right_rounded),
+                        const Text(
                           'Destinasi',
                           style: TextStyle(
                               color: Color(0xFFFE6D00),
@@ -60,10 +91,10 @@ class _DetailPageState extends State<DetailPage> {
                               fontWeight: FontWeight.w400,
                               fontSize: 14),
                         ),
-                        Icon(Icons.chevron_right_rounded),
+                        const Icon(Icons.chevron_right_rounded),
                         Text(
                           product.title,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color(0xFF000000),
                               fontFamily: montserrat,
                               fontWeight: FontWeight.w400,
@@ -71,7 +102,7 @@ class _DetailPageState extends State<DetailPage> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 35,
                     ),
                     // Content
@@ -83,7 +114,7 @@ class _DetailPageState extends State<DetailPage> {
                           flex: 2,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
+                            children: <Widget>[
                               // Product Image
                               Center(
                                 child: Container(
@@ -227,64 +258,335 @@ class _DetailPageState extends State<DetailPage> {
                                 ],
                               ),
                               const SizedBox(height: 16),
+                              // Detail Penerbangan
                               Container(
                                 decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey
+                                          .withOpacity(0.05), // Shadow color
+                                      spreadRadius: 5, // Spread radius
+                                      blurRadius: 16, // Blur radius
+                                      offset: const Offset(0,
+                                          4.12), // Offset: horizontal, vertical
+                                    ),
+                                  ],
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 33, horizontal: 25),
+                                padding: const EdgeInsets.all(25),
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Maskapai',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontFamily: plusjakartasans,
-                                          fontWeight: FontWeight.w600
-                                      ),
+                                          fontWeight: FontWeight.w600),
                                     ),
-                                    SizedBox(height: 24,),
+                                    const SizedBox(
+                                      height: 24,
+                                    ),
                                     Row(
                                       children: [
-                                        Expanded(child: Row(
-
-                                        ))
+                                        Container(
+                                          width: 270,
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 16.0, horizontal: 33.0),
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                              border: Border.all(width: 0.5)),
+                                          child: Row(
+                                            children: [
+                                              Image.asset(
+                                                product.airline.logoPath,
+                                                width: 65,
+                                              ),
+                                              const SizedBox(
+                                                width: 25,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    product.airline.name,
+                                                    style: const TextStyle(
+                                                        fontFamily: montserrat,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 24),
+                                                  ),
+                                                  const Text(
+                                                    'AIRBUS A320',
+                                                    style: TextStyle(
+                                                        fontFamily: montserrat,
+                                                        fontWeight:
+                                                            FontWeight.w400,
+                                                        fontSize: 14,
+                                                        color:
+                                                            Color(0xFF464646)),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(width: 130),
+                                        const Expanded(
+                                            child: IntrinsicHeight(
+                                          child: Row(
+                                            children: <Widget>[
+                                              Icon(
+                                                Icons.flight_rounded,
+                                                size: 24,
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              VerticalDivider(
+                                                thickness: 1,
+                                                color: Color(0xFFD7E2EE),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Icon(
+                                                Icons.wifi_rounded,
+                                                size: 24,
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              VerticalDivider(
+                                                thickness: 1,
+                                                color: Color(0xFFD7E2EE),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Icon(
+                                                Icons.alarm_on_rounded,
+                                                size: 24,
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              VerticalDivider(
+                                                thickness: 1,
+                                                color: Color(0xFFD7E2EE),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Icon(
+                                                Icons.fastfood_rounded,
+                                                size: 24,
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              VerticalDivider(
+                                                thickness: 1,
+                                                color: Color(0xFFD7E2EE),
+                                              ),
+                                              SizedBox(
+                                                width: 20,
+                                              ),
+                                              Icon(Icons.flight_class_rounded),
+                                            ],
+                                          ),
+                                        )),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 40,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          product.airline.departureAirport,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: montserrat,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 17,
+                                        ),
+                                        Image.asset(
+                                            'images/MaskapaiColored/DepartureLine.png'),
+                                        const SizedBox(
+                                          width: 25,
+                                        ),
+                                        const Icon(
+                                          Icons.flight_takeoff_rounded,
+                                          size: 20,
+                                        ),
+                                        const SizedBox(
+                                          width: 25,
+                                        ),
+                                        Image.asset(
+                                            'images/MaskapaiColored/DepartureLine2.png'),
+                                        const SizedBox(
+                                          width: 17,
+                                        ),
+                                        Text(
+                                          product.airline.transitAirport,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: montserrat,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 17,
+                                        ),
+                                        Image.asset(
+                                            'images/MaskapaiColored/DepartureLine.png'),
+                                        const SizedBox(
+                                          width: 25,
+                                        ),
+                                        const Icon(Icons.flight_land_rounded,
+                                            size: 20),
+                                        const SizedBox(
+                                          width: 25,
+                                        ),
+                                        Image.asset(
+                                            'images/MaskapaiColored/DepartureLine2.png'),
+                                        const SizedBox(
+                                          width: 17,
+                                        ),
+                                        Text(
+                                          product.airline.arrivalAirport,
+                                          style: const TextStyle(
+                                            fontSize: 16,
+                                            fontFamily: montserrat,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        )
                                       ],
                                     )
                                   ],
                                 ),
                               ),
-                              Text(
-                                'Description: ${product.description}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
+                              const SizedBox(
+                                height: 24,
                               ),
-                              Text(
-                                'Airlines: ${product.airline}',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              const SizedBox(height: 8),
                               const Text(
-                                'Facilities:',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                'Deskripsi',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    fontFamily: montserrat),
                               ),
-                              Wrap(
-                                spacing: 8.0,
-                                children: product.facilities.map((facility) {
-                                  return Chip(
-                                    label: Text(
-                                        facility.name), // Use facility.name
-                                    avatar: const Icon(Icons
-                                        .check), // Example icon for facility
-                                  );
-                                }).toList(),
+                              const SizedBox(
+                                height: 16,
                               ),
+                              Text(product.description,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w200,
+                                    fontFamily: montserrat,
+                                  ),
+                                  textAlign: TextAlign.justify),
+                              const SizedBox(height: 24),
+                              const Text(
+                                'Bonus',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    fontFamily: montserrat),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              ListView(
+                                shrinkWrap: true,
+                                padding: const EdgeInsets.all(8.0),
+                                children: [
+                                  Wrap(
+                                    spacing: 20.0, // Space between columns
+                                    runSpacing: 10.0, // Space between rows
+                                    children: [
+                                      for (var i = 0;
+                                          i < product.facilities.length;
+                                          i += 2)
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            // First column item
+                                            Expanded(
+                                              child: Row(
+                                                children: [
+                                                  Icon(product
+                                                      .facilities[i].iconPath),
+                                                  const SizedBox(
+                                                      width:
+                                                          8.0), // Space between icon and text
+                                                  Expanded(
+                                                    child: Text(
+                                                      product.facilities[i]
+                                                          .name, // Facility name
+                                                      style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                      overflow: TextOverflow
+                                                          .ellipsis, // Handles long text
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            // Second column item, ensure it exists
+                                            if (i + 1 <
+                                                product.facilities.length)
+                                              Expanded(
+                                                child: Row(
+                                                  children: [
+                                                    Icon(product
+                                                        .facilities[i + 1]
+                                                        .iconPath), // Corrected here
+                                                    const SizedBox(width: 8.0),
+                                                    Expanded(
+                                                      child: Text(
+                                                        product
+                                                            .facilities[i + 1]
+                                                            .name, // Facility name
+                                                        style: const TextStyle(
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                        overflow: TextOverflow
+                                                            .ellipsis, // Handles long text
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+
                               const SizedBox(height: 16),
                               const Text(
                                 'Additional Information:',
-                                style: TextStyle(fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                    fontFamily: montserrat),
                               ),
+                              const SizedBox(height: 16),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: product.additionalInfo.map((info) {
@@ -294,8 +596,11 @@ class _DetailPageState extends State<DetailPage> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text("• ",
-                                            style: TextStyle(fontSize: 18)),
+                                        const Text("- ",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontFamily: montserrat,
+                                                fontWeight: FontWeight.w200)),
                                         Expanded(child: Text(info)),
                                       ],
                                     ),
@@ -306,6 +611,7 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         const SizedBox(width: 40),
+                        // Content kanan
                         Expanded(
                           child: Container(
                             decoration: BoxDecoration(
@@ -321,9 +627,7 @@ class _DetailPageState extends State<DetailPage> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       IconButton(
-                                        onPressed: () {
-                                          // Handle left icon press
-                                        },
+                                        onPressed: _selectPreviousPackage,
                                         icon: const Icon(
                                             Icons.chevron_left_rounded),
                                         iconSize: 48,
@@ -331,7 +635,7 @@ class _DetailPageState extends State<DetailPage> {
                                       ),
                                       const SizedBox(width: 12),
                                       Text(
-                                        product.selectedPackage,
+                                        selectedPackage.packageType,
                                         style: const TextStyle(
                                           fontSize: 24,
                                           fontFamily: 'Montserrat',
@@ -340,9 +644,7 @@ class _DetailPageState extends State<DetailPage> {
                                       ),
                                       const SizedBox(width: 12),
                                       IconButton(
-                                        onPressed: () {
-                                          // Handle right icon press
-                                        },
+                                        onPressed: _selectNextPackage,
                                         icon: const Icon(
                                             Icons.chevron_right_rounded),
                                         iconSize: 48,
@@ -351,54 +653,49 @@ class _DetailPageState extends State<DetailPage> {
                                     ],
                                   ),
                                   const Divider(),
-                                  // Hotel details
-                                  ...product.packages
-                                      .firstWhere((pkg) =>
-                                          pkg.packageType ==
-                                          product.selectedPackage)
-                                      .hotels
-                                      .map((hotel) => Row(
-                                            children: [
-                                              Expanded(
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      hotel.name,
-                                                      style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                      ),
-                                                    ),
-                                                    const Text(
-                                                      'Setaraf',
-                                                      style: TextStyle(
-                                                        color: Colors.grey,
-                                                        fontSize: 14,
-                                                      ),
-                                                    ),
-                                                  ],
+                                  // Hotel details for the selected package
+                                  ...selectedPackage.hotels.map((hotel) => Row(
+                                        children: [
+                                          Expanded(
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  hotel.name,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16,
+                                                  ),
                                                 ),
-                                              ),
-                                              Row(
-                                                children: List.generate(
-                                                    hotel.starRating,
-                                                    (index) => const Icon(
-                                                        Icons.star,
-                                                        color: Colors.orange,
-                                                        size: 16)),
-                                              ),
-                                              Row(
-                                                children: List.generate(
-                                                    5 - hotel.starRating,
-                                                    (index) => const Icon(
-                                                        Icons.star_border,
-                                                        size: 16)),
-                                              ),
-                                            ],
-                                          )),
+                                                const Text(
+                                                  'Setaraf',
+                                                  style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Row(
+                                            children: List.generate(
+                                                hotel.starRating, (index) {
+                                              return const Icon(Icons.star,
+                                                  color: Colors.orange,
+                                                  size: 16);
+                                            }),
+                                          ),
+                                          Row(
+                                            children: List.generate(
+                                                5 - hotel.starRating, (index) {
+                                              return const Icon(
+                                                  Icons.star_border,
+                                                  size: 16);
+                                            }),
+                                          ),
+                                        ],
+                                      )),
                                   const SizedBox(height: 16),
                                   // Seat Selection
                                   const Text(
@@ -415,7 +712,7 @@ class _DetailPageState extends State<DetailPage> {
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 12, vertical: 8),
                                     ),
-                                    value: product.selectedSeats,
+                                    value: widget.product.selectedSeats,
                                     items:
                                         List.generate(5, (index) => index + 1)
                                             .map((int value) {
@@ -427,7 +724,7 @@ class _DetailPageState extends State<DetailPage> {
                                     onChanged: (int? newValue) {
                                       setState(() {
                                         if (newValue != null) {
-                                          product.updateSelectedSeats(newValue);
+                                          widget.product.updateSelectedSeats(newValue);
                                         }
                                       });
                                     },
@@ -447,7 +744,8 @@ class _DetailPageState extends State<DetailPage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       const Text('Harga Normal'),
-                                      Text('Rp ${product.price.toString()}'),
+                                      Text(
+                                          'Rp ${widget.product.price.toString()}'),
                                     ],
                                   ),
                                   Row(
@@ -456,7 +754,7 @@ class _DetailPageState extends State<DetailPage> {
                                     children: [
                                       const Text('Diskon'),
                                       Text(
-                                        'Rp ${product.discountPercentage.toString()}',
+                                        'Rp ${widget.product.discountPercentage.toString()}',
                                         style: const TextStyle(
                                           decoration:
                                               TextDecoration.lineThrough,
@@ -472,7 +770,7 @@ class _DetailPageState extends State<DetailPage> {
                                     children: [
                                       const Text('Total'),
                                       Text(
-                                        'Rp ${product.finalPrice.toString()}',
+                                        'Rp ${(widget.product.price + selectedPackage.additionalPrice).toString()}',
                                         style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 16,
@@ -483,26 +781,28 @@ class _DetailPageState extends State<DetailPage> {
                                   const SizedBox(height: 16),
                                   // Konsultasi Paket Button
                                   Center(
-                                    child: ElevatedButton(
+                                    child: OutlinedButton(
                                       onPressed: () {
                                         // Handle konsultasi button press
                                       },
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 16, horizontal: 32),
-                                        backgroundColor: Colors.blue,
+                                      style: OutlinedButton.styleFrom(
+                                        backgroundColor: Colors.white, // Button background color
+                                        side: const BorderSide(color: Color(0xFF0047BB)), // Button border color
+                                        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 128),
                                         shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                          borderRadius: BorderRadius.circular(8),
                                         ),
                                       ),
                                       child: const Text(
                                         'Konsultasi Paket',
                                         style: TextStyle(
-                                            fontSize: 16, color: Colors.white),
+                                          color: Color(0xFF0047BB), // Text color
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  )
+
                                 ],
                               ),
                             ),
@@ -514,6 +814,8 @@ class _DetailPageState extends State<DetailPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 60),
+            const Footer()
           ],
         ),
       ),
