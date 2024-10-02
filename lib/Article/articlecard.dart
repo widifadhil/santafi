@@ -107,7 +107,7 @@ class ArticleCard extends StatelessWidget {
                               width: 15,
                             ),
                             Text(
-                                '${readCount}',
+                                '$readCount',
                                 style: TextStyle(
                                     color: Color(0xFF333333),
                                     fontFamily: montserrat,
@@ -139,7 +139,15 @@ final List<Map<String, dynamic>> allArticles = [
     'title': 'Panduan Lengkap Umrah untuk Pemula: Langkah Demi Langkah',
     'category': 'Umrah',
     'description':
-    'Artikel ini memberikan panduan komprehensif bagi mereka yang baru pertama kali melaksanakan Umrah. Mulai dari persiapan fisik hingga spiritual, semua langkah dijelaskan secara detail untuk memastikan perjalanan ibadah yang lancar dan berkesan. Dapatkan tips tentang apa yang harus dibawa, prosedur di tanah suci, hingga doa-doa penting selama Umrah.',
+    'Umrah adalah salah satu perjalanan spiritual yang diimpikan oleh banyak umat Muslim di seluruh dunia. Namun, untuk memastikan perjalanan ini berjalan lancar dan khusyuk, persiapan yang matang sangatlah penting. Dalam artikel ini, kami akan membahas langkah-langkah penting yang perlu Anda lakukan sebelum berangkat Umrah, dari persiapan dokumen hingga tips menjaga kesehatan selama ibadah.'
+        '\n\n1. **Persiapan Dokumen:** Pastikan paspor Anda masih berlaku minimal 6 bulan dari tanggal keberangkatan. Selain itu, visa Umrah perlu diurus dengan teliti. Jika Anda menggunakan jasa travel resmi seperti SantaFi, biasanya proses pengurusan visa akan dibantu oleh pihak agen. Jangan lupa untuk membawa salinan paspor, tiket pesawat, dan dokumen lainnya sebagai cadangan.'
+        '\n\n2. **Pemilihan Paket Umrah yang Tepat:** Memilih paket Umrah yang sesuai dengan kebutuhan dan budget Anda adalah hal penting lainnya. SantaFi menawarkan berbagai pilihan paket, mulai dari paket hemat hingga paket eksklusif dengan fasilitas premium.'
+        '\n\n3. **Persiapan Mental dan Spiritual:** Mulailah memperbanyak ibadah agar hati dan pikiran Anda siap untuk menjalani ibadah Umrah.'
+        '\n\n4. **Kesehatan dan Vaksinasi:** Pastikan kondisi kesehatan Anda dalam keadaan baik sebelum berangkat. Lakukan pemeriksaan kesehatan secara menyeluruh dan konsultasikan dengan dokter mengenai vaksinasi yang diperlukan.'
+        '\n\n5. **Tips Packing:** Packing untuk Umrah berbeda dengan packing untuk perjalanan biasa. Pastikan Anda membawa perlengkapan seperti sandal yang nyaman dan masker.'
+        '\n\n6. **Menjaga Etika dan Adab Selama Umrah:** Jaga perilaku, hormati sesama jamaah, dan hindari tindakan yang bisa mengganggu kenyamanan orang lain.'
+        '\n\n7. **Mengenal Kota Suci:** Selain melaksanakan ibadah Umrah, sempatkan diri Anda untuk menjelajahi keindahan dan sejarah kota suci Makkah dan Madinah.'
+        '\n\n**Kesimpulan:** Persiapan yang baik adalah kunci untuk menjalani ibadah Umrah dengan tenang dan khusyuk. Dengan mengikuti panduan di atas, Anda dapat memastikan bahwa perjalanan spiritual Anda akan menjadi pengalaman yang tak terlupakan.',
     'imageUrl': 'images/thumbnail.png',
     'publishDate': '12 Jan 2024',
     'readCount': 1250,

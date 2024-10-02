@@ -120,7 +120,7 @@ class _ArtikelPageState extends State<ArtikelPage> {
                         SizedBox(height: 30),
                         // Filter button container
                         Container(
-                          width: 570, // Adjust width to fit the filter buttons
+                          width: 600, // Adjust width to fit the filter buttons
                           height: 60,
                           decoration: BoxDecoration(
                             color: Colors
@@ -397,27 +397,43 @@ class _ArtikelPageState extends State<ArtikelPage> {
                                     isHoveredPrevious = false;
                                   });
                                 },
-                                child: ElevatedButton(
+                                child: isHoveredPrevious
+                                    ? ElevatedButton(
                                   onPressed: () {
                                     setState(() {
                                       currentPage--;
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: isHoveredPrevious
-                                        ? Color(0xFF0047BB)
-                                        : Colors.white,
+                                    backgroundColor: Color(0xFF0047BB),  // Active color
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderRadius: BorderRadius.circular(2.0),
                                     ),
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12.0),
+                                    minimumSize: Size(40, 40),  // Square size
+                                    padding: EdgeInsets.all(0),  // Remove internal padding
                                   ),
                                   child: Icon(
                                     Icons.chevron_left,
-                                    color: isHoveredPrevious
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color: Colors.white,
+                                  ),
+                                )
+                                    : OutlinedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      currentPage--;
+                                    });
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: BorderSide(color: Colors.grey),  // Gray outline color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    minimumSize: Size(40, 40),  // Square size
+                                    padding: EdgeInsets.all(0),  // Remove internal padding
+                                  ),
+                                  child: Icon(
+                                    Icons.chevron_left,
+                                    color: Colors.grey,  // Gray icon color for inactive state
                                   ),
                                 ),
                               ),
@@ -426,28 +442,47 @@ class _ArtikelPageState extends State<ArtikelPage> {
                             // Page numbers
                             for (int i = 1; i <= totalPages; i++)
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5.0),
-                                child: ElevatedButton(
+                                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: currentPage == i
+                                    ? ElevatedButton(
                                   onPressed: () {
                                     setState(() {
                                       currentPage = i;
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: currentPage == i
-                                        ? Color(0xFF0047BB)
-                                        : Colors.white,
+                                    backgroundColor: Color(0xFF0047BB),  // Active color
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderRadius: BorderRadius.circular(2.0),
                                     ),
+                                    minimumSize: Size(40, 40),  // Square size
+                                    padding: EdgeInsets.all(0),  // Remove internal padding
                                   ),
                                   child: Text(
                                     '$i',
                                     style: TextStyle(
-                                      color: currentPage == i
-                                          ? Colors.white
-                                          : Colors.black,
+                                      color: Colors.white,  // Active text color
+                                    ),
+                                  ),
+                                )
+                                    : OutlinedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      currentPage = i;
+                                    });
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: BorderSide(color: Colors.grey),  // Gray outline color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    minimumSize: Size(40, 40),  // Square size
+                                    padding: EdgeInsets.all(0),  // Remove internal padding
+                                  ),
+                                  child: Text(
+                                    '$i',
+                                    style: TextStyle(
+                                      color: Colors.grey,  // Gray text color for inactive state
                                     ),
                                   ),
                                 ),
@@ -467,33 +502,52 @@ class _ArtikelPageState extends State<ArtikelPage> {
                                     isHoveredNext = false;
                                   });
                                 },
-                                child: ElevatedButton(
+                                child: isHoveredNext
+                                    ? ElevatedButton(
                                   onPressed: () {
                                     setState(() {
                                       currentPage++;
                                     });
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: isHoveredNext
-                                        ? Color(0xFF0047BB)
-                                        : Colors.white,
+                                    backgroundColor: Color(0xFF0047BB),  // Active color
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderRadius: BorderRadius.circular(2.0),
                                     ),
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 12.0),
+                                    minimumSize: Size(40, 40),  // Square size
+                                    padding: EdgeInsets.all(0),  // Remove internal padding
                                   ),
                                   child: Icon(
                                     Icons.chevron_right,
-                                    color: isHoveredNext
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color: Colors.white,
+                                  ),
+                                )
+                                    : OutlinedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      currentPage++;
+                                    });
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: BorderSide(color: Colors.grey),  // Gray outline color
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(2.0),
+                                    ),
+                                    minimumSize: Size(40, 40),  // Square size
+                                    padding: EdgeInsets.all(0),  // Remove internal padding
+                                  ),
+                                  child: Icon(
+                                    Icons.chevron_right,
+                                    color: Colors.grey,  // Gray icon color for inactive state
                                   ),
                                 ),
                               ),
                           ],
                         ),
-                      ),
+                      )
+
+
+                    ,
                   ],
                 ],
               ),
